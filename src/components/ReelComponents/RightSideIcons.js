@@ -1,7 +1,19 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import React, { useContext } from 'react';
+import { MyContext } from '../../../App.tsx';
 
 const RightSideIcons = () => {
+
+  const {shareModelRef , commentModelRef , focusedIndex} = useContext(MyContext);
+
   return (
     <View
       style={{
@@ -12,24 +24,38 @@ const RightSideIcons = () => {
         right: 12,
         alignItems: 'center',
       }}>
-      <Image
-        source={require('../../assets/like_icon.png')}
-        style={{marginTop: 15, marginBottom: 8}}
-      />
+      <TouchableWithoutFeedback
+        onPress={() => {
+          // shareModelRef.current.open();
+          console.log('Hello',focusedIndex);
+        }}>
+        <Image
+          source={require('../../assets/like_icon.png')}
+          style={{marginTop: 15, marginBottom: 8}}
+        />
+      </TouchableWithoutFeedback>
+
       <Text numberOfLines={1} style={{fontSize: 11, color: 'white'}}>
         40.5k
       </Text>
-      <Image
-        source={require('../../assets/comment_icon.png')}
-        style={{marginTop: 20, marginBottom: 10}}
-      />
+
+      <TouchableWithoutFeedback onPress={()=>{
+        commentModelRef.current.open();
+      }}>
+        <Image
+          source={require('../../assets/comment_icon.png')}
+          style={{marginTop: 20, marginBottom: 10}}
+        />
+      </TouchableWithoutFeedback>
       <Text numberOfLines={1} style={{fontSize: 11, color: 'white'}}>
         40.5k
       </Text>
+    <TouchableWithoutFeedback onPress={()=>{shareModelRef.current.open();}}>
       <Image
         source={require('../../assets/share_icon.png')}
         style={{marginTop: 20, marginBottom: 10}}
       />
+     </TouchableWithoutFeedback>
       <Text numberOfLines={1} style={{fontSize: 11, color: 'white'}}>
         40.5k
       </Text>

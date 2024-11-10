@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   ScrollView,
@@ -25,14 +25,20 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import ReelScreen from './src/screens/ReelScreen';
 import { SafeAreaProvider} from 'react-native-safe-area-context';
+import RBSheet from 'react-native-raw-bottom-sheet'; // Import RBSheet to use as the type
 
-const MyContext = React.createContext({});
+export const MyContext = React.createContext({});
+
 
 function App(): React.JSX.Element {
   
+  const shareModelRef = useRef();
+  const commentModelRef = useRef();
+  const [focusedIndex , setFocusedIndex]  = useState(0);
+  
 
   return (
-    <MyContext.Provider value={{}}>
+    <MyContext.Provider value={{shareModelRef , commentModelRef , focusedIndex ,setFocusedIndex}}>
     <SafeAreaProvider style = {{height: "100%" , width: "100%" , backgroundColor: "black"}}>
        <ReelScreen/>
     </SafeAreaProvider>

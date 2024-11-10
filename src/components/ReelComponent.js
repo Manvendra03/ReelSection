@@ -1,15 +1,32 @@
-import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useContext, useEffect, useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import RightSideIcons from './ReelComponents/RightSideIcons';
 import BottomContent from './ReelComponents/BottomContent';
 import ProgressBar from './ReelComponents/ProgressBar';
+import Video from 'react-native-video';
+import {MyContext} from '../../App';
 
 const {height} = Dimensions.get('window');
 
-const ReelComponent = ({item}) => {
+const ReelComponent = ({index, item , videoRef}) => {
+  const {focusedIndex} = useContext(MyContext);
+   
   const insets = useSafeAreaInsets();
   const reelHeight = height - 48 - insets.top - insets.bottom;
+
+  useEffect(()=>{
+    console.log("ReelComponent get Renderss ... ");
+    // videoRef.current.seek(0);
+  },[])
 
   return (
     <View
@@ -22,15 +39,27 @@ const ReelComponent = ({item}) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-
-      <Image
+      {/* <Image
         source={{
           uri: 'https://i.pinimg.com/736x/69/f7/66/69f7666440ceb4efe41223601648de5d.jpg',
         }}
         style={{height: '100%', width: '100%'}}
         resizeMode="cover" // Adjusts how the image scales within the view
       />
-   
+    */}
+      <Video
+        ref={videoRef}
+        source={item.video_url}
+        repeat
+        paused={focusedIndex != index}
+        controls={true}
+        style={{
+          height: '100%',
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }} />
+
       {/* // main area content */}
       <View
         style={{
@@ -42,12 +71,12 @@ const ReelComponent = ({item}) => {
           bottom: 0,
         }}>
         {/* //right side icon columns */}
-        <RightSideIcons/>
-      
+        <RightSideIcons />
+
         {/* // desc content */}
-         <BottomContent/>
+        <BottomContent />
         {/* //progress bar */}
-          <ProgressBar/>
+        <ProgressBar />
       </View>
     </View>
   );
