@@ -26,6 +26,7 @@ import {
 import ReelScreen from './src/screens/ReelScreen';
 import { SafeAreaProvider} from 'react-native-safe-area-context';
 import RBSheet from 'react-native-raw-bottom-sheet'; // Import RBSheet to use as the type
+import { ReelData } from './src/ReelData';
 
 export const MyContext = React.createContext({});
 
@@ -35,10 +36,13 @@ function App(): React.JSX.Element {
   const shareModelRef = useRef();
   const commentModelRef = useRef();
   const [focusedIndex , setFocusedIndex]  = useState(0);
+  const [focusedVideoRef,setFocusedVideoRef] = useState(null);  
   
 
+  const videoRefs = useRef(ReelData.map(() => React.createRef()));
+   
   return (
-    <MyContext.Provider value={{shareModelRef , commentModelRef , focusedIndex ,setFocusedIndex}}>
+    <MyContext.Provider value={{shareModelRef , commentModelRef , focusedIndex ,setFocusedIndex,focusedVideoRef,setFocusedVideoRef,videoRefs}}>
     <SafeAreaProvider style = {{height: "100%" , width: "100%" , backgroundColor: "black"}}>
        <ReelScreen/>
     </SafeAreaProvider>

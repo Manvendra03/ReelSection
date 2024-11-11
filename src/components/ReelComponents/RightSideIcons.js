@@ -7,12 +7,15 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import React, { useContext } from 'react';
-import { MyContext } from '../../../App.tsx';
+import React, {useContext, useState} from 'react';
+import {MyContext} from '../../../App.tsx';
+import BouncingImage from './BouncingImage.js';
+import DislikeImage from './dislikeImage.js';
 
 const RightSideIcons = () => {
-
-  const {shareModelRef , commentModelRef , focusedIndex} = useContext(MyContext);
+  const {shareModelRef, commentModelRef, focusedIndex, focusedVideoRef} =
+    useContext(MyContext);
+  const [isLiked, setIsLiked] = useState(true);
 
   return (
     <View
@@ -24,24 +27,21 @@ const RightSideIcons = () => {
         right: 12,
         alignItems: 'center',
       }}>
-      <TouchableWithoutFeedback
-        onPress={() => {
-          // shareModelRef.current.open();
-          console.log('Hello',focusedIndex);
-        }}>
-        <Image
-          source={require('../../assets/like_icon.png')}
-          style={{marginTop: 15, marginBottom: 8}}
-        />
-      </TouchableWithoutFeedback>
+     
+    {
+      isLiked ? 
+        <BouncingImage key={1} LikedImage = {true} setIsLiked={setIsLiked}/>
+      : <BouncingImage key={2} LikedImage = {false} setIsLiked={setIsLiked}/>}
+       
 
       <Text numberOfLines={1} style={{fontSize: 11, color: 'white'}}>
         40.5k
       </Text>
 
-      <TouchableWithoutFeedback onPress={()=>{
-        commentModelRef.current.open();
-      }}>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          commentModelRef.current.open();
+        }}>
         <Image
           source={require('../../assets/comment_icon.png')}
           style={{marginTop: 20, marginBottom: 10}}
@@ -50,12 +50,15 @@ const RightSideIcons = () => {
       <Text numberOfLines={1} style={{fontSize: 11, color: 'white'}}>
         40.5k
       </Text>
-    <TouchableWithoutFeedback onPress={()=>{shareModelRef.current.open();}}>
-      <Image
-        source={require('../../assets/share_icon.png')}
-        style={{marginTop: 20, marginBottom: 10}}
-      />
-     </TouchableWithoutFeedback>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          shareModelRef.current.open();
+        }}>
+        <Image
+          source={require('../../assets/share_icon.png')}
+          style={{marginTop: 20, marginBottom: 10}}
+        />
+      </TouchableWithoutFeedback>
       <Text numberOfLines={1} style={{fontSize: 11, color: 'white'}}>
         40.5k
       </Text>

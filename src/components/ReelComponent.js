@@ -14,18 +14,20 @@ import BottomContent from './ReelComponents/BottomContent';
 import ProgressBar from './ReelComponents/ProgressBar';
 import Video from 'react-native-video';
 import {MyContext} from '../../App';
+import DislikeImage from './ReelComponents/dislikeImage';
 
 const {height} = Dimensions.get('window');
 
-const ReelComponent = ({index, item , videoRef}) => {
-  const {focusedIndex} = useContext(MyContext);
-   
+const ReelComponent = ({index, item ,Videoref}) => {
+  const {focusedIndex,setFocusedVideoRef} = useContext(MyContext);
+
+
   const insets = useSafeAreaInsets();
   const reelHeight = height - 48 - insets.top - insets.bottom;
 
   useEffect(()=>{
     console.log("ReelComponent get Renderss ... ");
-    // videoRef.current.seek(0);
+   
   },[])
 
   return (
@@ -39,18 +41,12 @@ const ReelComponent = ({index, item , videoRef}) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      {/* <Image
-        source={{
-          uri: 'https://i.pinimg.com/736x/69/f7/66/69f7666440ceb4efe41223601648de5d.jpg',
-        }}
-        style={{height: '100%', width: '100%'}}
-        resizeMode="cover" // Adjusts how the image scales within the view
-      />
-    */}
+      
       <Video
-        ref={videoRef}
+        ref={Videoref}
         source={item.video_url}
         repeat
+        // paused
         paused={focusedIndex != index}
         controls={true}
         style={{
@@ -58,7 +54,8 @@ const ReelComponent = ({index, item , videoRef}) => {
           width: '100%',
           justifyContent: 'center',
           alignItems: 'center',
-        }} />
+        }} >
+           </Video>
 
       {/* // main area content */}
       <View
