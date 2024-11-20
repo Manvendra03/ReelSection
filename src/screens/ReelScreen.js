@@ -29,7 +29,6 @@ const ReelScreen = () => {
     focusedIndex,
     focusedVideoRef,
     setFocusedIndex,
-   
     videoRefs,
     setFocusedVideoRef,
   } = useContext(MyContext);

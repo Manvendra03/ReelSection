@@ -37,12 +37,12 @@ function App(): React.JSX.Element {
   const commentModelRef = useRef();
   const [focusedIndex , setFocusedIndex]  = useState(0);
   const [focusedVideoRef,setFocusedVideoRef] = useState(null);  
-  
+  const [ismute, setIsMute] = useState(false);
 
   const videoRefs = useRef(ReelData.map(() => React.createRef()));
    
   return (
-    <MyContext.Provider value={{shareModelRef , commentModelRef , focusedIndex ,setFocusedIndex,focusedVideoRef,setFocusedVideoRef,videoRefs}}>
+    <MyContext.Provider value={{shareModelRef , ismute , setIsMute , commentModelRef , focusedIndex ,setFocusedIndex,focusedVideoRef,setFocusedVideoRef,videoRefs}}>
     <SafeAreaProvider style = {{height: "100%" , width: "100%" , backgroundColor: "black"}}>
        <ReelScreen/>
     </SafeAreaProvider>

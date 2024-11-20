@@ -10,12 +10,12 @@ import {
 import React, {useContext, useState} from 'react';
 import {MyContext} from '../../../App.tsx';
 import BouncingImage from './BouncingImage.js';
-import DislikeImage from './dislikeImage.js';
+import WhiteLikeImage from '../Models/WhiteLikeImage.js';
 
-const RightSideIcons = () => {
+const RightSideIcons = ({isLiked,setIsLiked}) => {
   const {shareModelRef, commentModelRef, focusedIndex, focusedVideoRef} =
     useContext(MyContext);
-  const [isLiked, setIsLiked] = useState(true);
+  
 
   return (
     <View
